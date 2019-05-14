@@ -1,0 +1,2 @@
+json.extract! order, :id, :status, :number, :os_date, :hour, :medium, :called, :operator, :sector, :responsible, :contact, :unity, :scope, :address, :route, :vehicle, :ranking, :modality, :cause, :description, :authorization, :priority, :link, :operational, :measure, :request_date, :insertion_routing, :reporting_routing, :deliberation, :temporal_lapse, :order_record, :feedback, :execution_availability, :devolution, :created_at, :updated_at
+json.url order_url(order, format: :json)

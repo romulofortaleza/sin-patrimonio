@@ -1,0 +1,306 @@
+<%= form_with(model: order, local: true, class: 'form-horizontal') do |form| %>
+      <div class="form-group <%= order.errors[:status].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Status</label>
+      <div class="col-sm-10">
+        <%= form.text_field :status, class: 'form-control' %>
+        <% if order.errors[:status].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:status].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:number].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Number</label>
+      <div class="col-sm-10">
+        <%= form.text_field :number, class: 'form-control' %>
+        <% if order.errors[:number].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:number].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:os_date].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Os date</label>
+      <div class="col-sm-10">
+        <%= form.date_select :os_date, class: 'form-control' %>
+        <% if order.errors[:os_date].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:os_date].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:hour].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Hour</label>
+      <div class="col-sm-10">
+        <%= form.datetime_select :hour, class: 'form-control' %>
+        <% if order.errors[:hour].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:hour].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:medium].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Medium</label>
+      <div class="col-sm-10">
+        <%= form.text_field :medium, class: 'form-control' %>
+        <% if order.errors[:medium].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:medium].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:called].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Called</label>
+      <div class="col-sm-10">
+        <%= form.text_field :called, class: 'form-control' %>
+        <% if order.errors[:called].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:called].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:operator].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Operator</label>
+      <div class="col-sm-10">
+        <%= form.number_field :operator, class: 'form-control' %>
+        <% if order.errors[:operator].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:operator].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:sector].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Sector</label>
+      <div class="col-sm-10">
+        <%= form.text_field :sector, class: 'form-control' %>
+        <% if order.errors[:sector].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:sector].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:responsible].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Responsible</label>
+      <div class="col-sm-10">
+        <%= form.text_field :responsible, class: 'form-control' %>
+        <% if order.errors[:responsible].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:responsible].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:contact].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Contact</label>
+      <div class="col-sm-10">
+        <%= form.text_field :contact, class: 'form-control' %>
+        <% if order.errors[:contact].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:contact].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:unity].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Unity</label>
+      <div class="col-sm-10">
+        <%= form.text_field :unity, class: 'form-control' %>
+        <% if order.errors[:unity].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:unity].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:scope].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Scope</label>
+      <div class="col-sm-10">
+        <%= form.text_field :scope, class: 'form-control' %>
+        <% if order.errors[:scope].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:scope].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:address].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Address</label>
+      <div class="col-sm-10">
+        <%= form.text_field :address, class: 'form-control' %>
+        <% if order.errors[:address].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:address].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:route].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Route</label>
+      <div class="col-sm-10">
+        <%= form.check_box :route, class: 'form-control' %>
+        <% if order.errors[:route].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:route].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:vehicle].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Vehicle</label>
+      <div class="col-sm-10">
+        <%= form.text_field :vehicle, class: 'form-control' %>
+        <% if order.errors[:vehicle].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:vehicle].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:ranking].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Ranking</label>
+      <div class="col-sm-10">
+        <%= form.text_field :ranking, class: 'form-control' %>
+        <% if order.errors[:ranking].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:ranking].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:modality].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Modality</label>
+      <div class="col-sm-10">
+        <%= form.text_field :modality, class: 'form-control' %>
+        <% if order.errors[:modality].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:modality].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:cause].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Cause</label>
+      <div class="col-sm-10">
+        <%= form.text_field :cause, class: 'form-control' %>
+        <% if order.errors[:cause].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:cause].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:description].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Description</label>
+      <div class="col-sm-10">
+        <%= form.text_field :description, class: 'form-control' %>
+        <% if order.errors[:description].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:description].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:authorization].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Authorization</label>
+      <div class="col-sm-10">
+        <%= form.text_field :authorization, class: 'form-control' %>
+        <% if order.errors[:authorization].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:authorization].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:priority].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Priority</label>
+      <div class="col-sm-10">
+        <%= form.text_field :priority, class: 'form-control' %>
+        <% if order.errors[:priority].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:priority].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:link].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Link</label>
+      <div class="col-sm-10">
+        <%= form.text_field :link, class: 'form-control' %>
+        <% if order.errors[:link].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:link].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:operational].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Operational</label>
+      <div class="col-sm-10">
+        <%= form.text_field :operational, class: 'form-control' %>
+        <% if order.errors[:operational].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:operational].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:measure].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Measure</label>
+      <div class="col-sm-10">
+        <%= form.check_box :measure, class: 'form-control' %>
+        <% if order.errors[:measure].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:measure].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:request_date].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Request date</label>
+      <div class="col-sm-10">
+        <%= form.date_select :request_date, class: 'form-control' %>
+        <% if order.errors[:request_date].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:request_date].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:insertion_routing].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Insertion routing</label>
+      <div class="col-sm-10">
+        <%= form.text_field :insertion_routing, class: 'form-control' %>
+        <% if order.errors[:insertion_routing].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:insertion_routing].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:reporting_routing].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Reporting routing</label>
+      <div class="col-sm-10">
+        <%= form.text_field :reporting_routing, class: 'form-control' %>
+        <% if order.errors[:reporting_routing].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:reporting_routing].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:deliberation].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Deliberation</label>
+      <div class="col-sm-10">
+        <%= form.text_field :deliberation, class: 'form-control' %>
+        <% if order.errors[:deliberation].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:deliberation].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:temporal_lapse].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Temporal lapse</label>
+      <div class="col-sm-10">
+        <%= form.text_field :temporal_lapse, class: 'form-control' %>
+        <% if order.errors[:temporal_lapse].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:temporal_lapse].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:order_record].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Order record</label>
+      <div class="col-sm-10">
+        <%= form.text_field :order_record, class: 'form-control' %>
+        <% if order.errors[:order_record].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:order_record].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:feedback].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Feedback</label>
+      <div class="col-sm-10">
+        <%= form.text_field :feedback, class: 'form-control' %>
+        <% if order.errors[:feedback].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:feedback].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:execution_availability].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Execution availability</label>
+      <div class="col-sm-10">
+        <%= form.text_field :execution_availability, class: 'form-control' %>
+        <% if order.errors[:execution_availability].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:execution_availability].first %></span>
+        <% end %>
+      </div>
+    </div>    
+      <div class="form-group <%= order.errors[:devolution].any? ? 'has-error' : '' %>">
+      <label class="col-sm-2 control-label">Devolution</label>
+      <div class="col-sm-10">
+        <%= form.text_field :devolution, class: 'form-control' %>
+        <% if order.errors[:devolution].any? %>
+          <span class="help-block m-b-none font-bold"><%= order.errors[:devolution].first %></span>
+        <% end %>
+      </div>
+    </div>    
+    <div class="hr-line-dashed"></div>
+  <div class="form-group">
+    <div class="col-sm-4 col-sm-offset-2">
+        <%= link_to 'Cancelar', orders_path, :class => 'btn btn-white' %>     
+        <%= form.submit 'Salvar', :class => 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

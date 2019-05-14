@@ -1,0 +1,71 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  status: MyString
+  number: MyString
+  os_date: 2019-05-14
+  hour: 2019-05-14 00:58:22
+  medium: MyString
+  called: MyString
+  operator: 1
+  sector: MyString
+  responsible: MyString
+  contact: MyString
+  unity: MyString
+  scope: MyString
+  address: MyString
+  route: false
+  vehicle: MyString
+  ranking: MyString
+  modality: MyString
+  cause: MyString
+  description: MyString
+  authorization: MyString
+  priority: MyString
+  link: MyString
+  operational: MyString
+  measure: false
+  request_date: 2019-05-14
+  insertion_routing: MyString
+  reporting_routing: MyString
+  deliberation: MyString
+  temporal_lapse: MyString
+  order_record: MyString
+  feedback: MyString
+  execution_availability: MyString
+  devolution: MyString
+
+two:
+  status: MyString
+  number: MyString
+  os_date: 2019-05-14
+  hour: 2019-05-14 00:58:22
+  medium: MyString
+  called: MyString
+  operator: 1
+  sector: MyString
+  responsible: MyString
+  contact: MyString
+  unity: MyString
+  scope: MyString
+  address: MyString
+  route: false
+  vehicle: MyString
+  ranking: MyString
+  modality: MyString
+  cause: MyString
+  description: MyString
+  authorization: MyString
+  priority: MyString
+  link: MyString
+  operational: MyString
+  measure: false
+  request_date: 2019-05-14
+  insertion_routing: MyString
+  reporting_routing: MyString
+  deliberation: MyString
+  temporal_lapse: MyString
+  order_record: MyString
+  feedback: MyString
+  execution_availability: MyString
+  devolution: MyString

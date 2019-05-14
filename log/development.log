@@ -1,0 +1,1240 @@
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE DATABASE "biotec_development" ENCODING = 'utf8'[0m
+  [1m[35m (3.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE DATABASE "biotec_development" ENCODING = 'utf8'[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8342337733006248720)[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20180903114430)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (12.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20180903114430"]]
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateInstrumentRegistrations (20180911184533)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.6ms)[0m  [1m[35mCREATE TABLE "instrument_registrations" ("id" bigserial primary key, "instrument_number" integer, "internal_number" integer, "extra_number" integer, "object_agreement" character varying, "granting_organ" character varying, "linked_organ" character varying, "existence_im" character varying, "instituition_name" character varying, "value_transfer" character varying, "counterpart_value" character varying, "total" character varying, "signature_date" date, "end_date" date, "suspensive_date" date, "type" character varying, "address" character varying, "open_date" date, "organ" character varying, "user" character varying, "signature" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20180911184533"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddFieldToCreateInstrumentRegistrations (20180919120635)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "instrument_registrations" ADD "instrument_type" character varying[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20180919120635"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateDocumentRegisters (20180921124452)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (12.9ms)[0m  [1m[35mCREATE TABLE "document_registers" ("id" bigserial primary key, "name" character varying, "instrument_registrations_id" bigint, "document_file" bytea, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_024792976d"
+FOREIGN KEY ("instrument_registrations_id")
+  REFERENCES "instrument_registrations" ("id")
+)[0m
+  [1m[35m (6.2ms)[0m  [1m[35mCREATE  INDEX  "index_document_registers_on_instrument_registrations_id" ON "document_registers"  ("instrument_registrations_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20180921124452"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (5.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(8342337733006248720)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (2.8ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "romulofortaleza@pce.com.br"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Rômulo"], ["email", "romulofortaleza@pce.com.br"], ["encrypted_password", "$2a$11$6FfqjgGsbPVhPI.v549JguGwMCzHeNzw.tbCty2G.Z9Rfjwh4ne5."], ["created_at", "2019-03-26 13:45:46.374886"], ["updated_at", "2019-03-26 13:45:46.374886"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for ::1 at 2019-03-26 10:46:03 -0300
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 17ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for ::1 at 2019-03-26 10:46:03 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/login
+  Rendered devise/shared/_links.html.erb (1.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/login (67.8ms)
+Completed 200 OK in 23832ms (Views: 23767.3ms | ActiveRecord: 12.7ms)
+
+
+Started GET "/assets/font-awesome.self-2a86d2017f4b74f22943750b3b50b9cb753581bab96cbdaaf2df53f4c04c995b.css?body=1" for ::1 at 2019-03-26 10:46:27 -0300
+Started GET "/assets/util.self-058acc63df74deca8f02557040aefca291a8a2a414f06aec1db224827c3a50c8.css?body=1" for ::1 at 2019-03-26 10:46:27 -0300
+Started GET "/assets/main.self-f5a7cdf8f68947ff64d294eef540edb6f44c48df63b521148fb3e1872911d484.css?body=1" for ::1 at 2019-03-26 10:46:27 -0300
+Started GET "/assets/dataTables/datatables.min.self-ca2a4585c54aaf152e8523922a960b5f956f8c3f1dbc68b780b0f59419efeb37.css?body=1" for ::1 at 2019-03-26 10:46:27 -0300
+Started GET "/assets/css-hamburgers/hamburgers.min.self-b3bfa2977fd7b52c934dad97e466658223fa6c4283413a19b70d5be4cd910b09.css?body=1" for ::1 at 2019-03-26 10:46:27 -0300
+Started GET "/assets/style.self-6379d16a69c9d59cb260a12e8f389f3e110164e631633d44d7b1f85a5b841a43.css?body=1" for ::1 at 2019-03-26 10:46:27 -0300
+Started GET "/assets/animate/animate.self-570992b3ad6a262de1924aa4ecc17a6f9cf45cb8fd0daaf3cfe5a9f2f3e08e2e.css?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/rails-ujs.self-3b600681e552d8090230990c0a2e8537aff48159bea540d275a620d272ba33a0.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/application.self-57a5f2f33d24688136dc6332b520d3b3a2ccbecbbf5034f5c20480f3e4d12d6b.css?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/popper.self-23d0e4674571ef619dc97acba7169155cec531ebea3136429568f24ab0755da7.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/jquery/jquery-3.1.1.min.self-9347a28e490a684188bc8e7748f6f086a53a87088854ac4de47095f42a085b5b.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/bootstrap/transition.self-6ad2488465135ab731a045a8ebbe3ea2fc501aed286042496eda1664fdd07ba9.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/bootstrap/alert.self-742145c5bb847aafdadc6e339be795628f8bc25f177e851f03a8c42278eb0312.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/bootstrap/button.self-126ac9bf0e7f2d8568f8da3a00fd5f0fac6eae0946331003370161fbf8d7975e.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/bootstrap/carousel.self-e47323f363ceb3dc0bdbce05e36e709ed428e339833a41140a85cb0af24b8127.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/bootstrap/collapse.self-2eb697f62b587bb786ff940d82dd4be88cdeeaf13ca128e3da3850c5fcaec301.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/bootstrap/modal.self-3e78617ade5663314b7ee0ea10375a5b34d59ffbade44939e3f2a4e4ef2019b3.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/bootstrap/tab.self-5bf7078b682f8b131332eefa46b45fa5eff2eca745fc0d03e2991450888f7c28.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/bootstrap/affix.self-6d6f1a7fc5c8aabf3547fa1b794fab6268f54bc55ad815e55873c71f52513517.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/bootstrap/dropdown.self-561cca1cbaf67474e01e9536f106bad541594860a6df997004591c1c1957a147.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/bootstrap/scrollspy.self-969f3c5f48cdf1e439c7fa1154c13b948715f5c689f87837c0b64521d3b46ef6.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/bootstrap/tooltip.self-05afb177e08f98997ccfc84fa08a215e4b27d48d5fe4d049080675e9dffd8199.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/bootstrap/popover.self-ca78ba0a35d9471f5df51b8fafb26912ce912d4c04351c6efbad984c32c3e3cb.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/metisMenu/jquery.metisMenu.self-587029531d977fc7fa10623dd670189a298bd606124c23fc2edd051da5b0c914.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/pace/pace.min.self-9bf6d667514a59744d5db2c9392aaf5595dec9c131a425ababa1cb8cddb814f2.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/slimscroll/jquery.slimscroll.min.self-a2008e2992d055fbe5108d326a54c3083f843da1a30240d2b2e1f706716fa03e.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/pdfjs/pdf.self-79a115ff57ba10432a6f6a4af5b90a22e141c87ac27ca6e61d6a3773e2afe765.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/pdfjs/pdf.worker.self-5bcdea6c00092279a2a50a8922c4f2850303e41ece02d48deb9b3d87271ec479.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/dataTables/datatables.min.self-b780cdd949f17bced4cdd9bc615568c5ee0eff74e024c214b12a216ef5064d3c.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/notifyjs/notify.self-580979233c906abe103d95ccdbfe97994e5a03d69946ab5b2f74dc3a667fde52.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/bootstrap/bootstrap.min.self-d6ce39ce73037670cfc183b1d73195f2b6f23565856af537a53efafedfe45a21.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/notifyjs.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" for ::1 at 2019-03-26 10:46:28 -0300
+Started GET "/assets/select2/select2.min.self-29080377793c2a531be0bad7d46aa3fcf1ede0008ebf68b1e4f97927f368ac38.js?body=1" for ::1 at 2019-03-26 10:46:29 -0300
+Started GET "/assets/tilt/tilt.jquery.min.self-8c343b24bfa1ada9122d5f5b38bfaa6fbcbf8f075dd751ff9d72c98278b46d9e.js?body=1" for ::1 at 2019-03-26 10:46:29 -0300
+Started GET "/assets/bootstrap/popper.min.self-f3a69a9249ed65c72f242a892d0c8223c6161d0c96e0ac9ae3e4356f832c6f5d.js?body=1" for ::1 at 2019-03-26 10:46:29 -0300
+Started GET "/assets/document_registers.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2019-03-26 10:46:29 -0300
+Started GET "/assets/main.self-e163c51f810df56a70efa8622c26e00d2479bf6661cfd67bcf488d9722ef6e37.js?body=1" for ::1 at 2019-03-26 10:46:29 -0300
+Started GET "/assets/inspinia.self-0105b2740ac6f751553fae37cd22fd48eee7a5092c5c29e32b685e736a59e704.js?body=1" for ::1 at 2019-03-26 10:46:29 -0300
+Started GET "/assets/system.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2019-03-26 10:46:29 -0300
+Started GET "/assets/application.self-068cf07d6ceeea13126d4d8fc4d77355cb04b58c2b8b9851b4afc703a2b65d2d.js?body=1" for ::1 at 2019-03-26 10:46:29 -0300
+Started GET "/assets/instrument_registrations.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2019-03-26 10:46:29 -0300
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for ::1 at 2019-03-26 10:46:29 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.5) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for ::1 at 2019-03-26 10:46:30 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.5) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Started POST "/users/sign_in" for ::1 at 2019-03-26 10:46:59 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Y7Srcl2QLrVzifr0TshM5b2hU/HQzcUFlYM2r5FwCjcb4qLuLualAySWWtT3U/jBq1NpEtfVgsbIqYi16NP37A==", "user"=>{"email"=>"romulofortaleza@pce.com.br", "password"=>"[FILTERED]"}, "commit"=>"Entrar"}
+  [1m[36mUser Load (4.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "romulofortaleza@pce.com.br"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 535ms (ActiveRecord: 4.8ms)
+
+
+Started GET "/" for ::1 at 2019-03-26 10:47:00 -0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.9ms)
+  Rendered layouts/_navigation.html.erb (13.1ms)
+  Rendered layouts/_topnavbar.html.erb (9.9ms)
+  Rendered layouts/_footer.html.erb (0.8ms)
+Completed 200 OK in 610ms (Views: 602.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/instrument_registrations" for ::1 at 2019-03-26 10:47:05 -0300
+Processing by InstrumentRegistrationsController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering instrument_registrations/index.html.erb within layouts/application
+  Rendered instrument_registrations/_header.html.erb (32.9ms)
+  [1m[36mInstrumentRegistration Load (15.3ms)[0m  [1m[34mSELECT "instrument_registrations".* FROM "instrument_registrations"[0m
+  Rendered instrument_registrations/index.html.erb within layouts/application (94.4ms)
+  Rendered layouts/_navigation.html.erb (5.0ms)
+  Rendered layouts/_topnavbar.html.erb (2.5ms)
+  Rendered layouts/_footer.html.erb (0.8ms)
+Completed 200 OK in 608ms (Views: 509.4ms | ActiveRecord: 32.4ms)
+
+
+Started GET "/" for ::1 at 2019-03-26 10:58:01 -0300
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (3.3ms)
+  Rendered layouts/_navigation.html.erb (1.7ms)
+  Rendered layouts/_topnavbar.html.erb (1.3ms)
+  Rendered layouts/_footer.html.erb (3.6ms)
+Completed 200 OK in 4184ms (Views: 4108.6ms | ActiveRecord: 20.6ms)
+
+
+Started GET "/assets/bootstrap/alert.self-742145c5bb847aafdadc6e339be795628f8bc25f177e851f03a8c42278eb0312.js?body=1" for ::1 at 2019-03-26 10:58:05 -0300
+Started GET "/assets/bootstrap/button.self-126ac9bf0e7f2d8568f8da3a00fd5f0fac6eae0946331003370161fbf8d7975e.js?body=1" for ::1 at 2019-03-26 10:58:05 -0300
+Started GET "/assets/bootstrap/carousel.self-e47323f363ceb3dc0bdbce05e36e709ed428e339833a41140a85cb0af24b8127.js?body=1" for ::1 at 2019-03-26 10:58:05 -0300
+Started GET "/assets/bootstrap/collapse.self-2eb697f62b587bb786ff940d82dd4be88cdeeaf13ca128e3da3850c5fcaec301.js?body=1" for ::1 at 2019-03-26 10:58:05 -0300
+Started GET "/assets/bootstrap/modal.self-3e78617ade5663314b7ee0ea10375a5b34d59ffbade44939e3f2a4e4ef2019b3.js?body=1" for ::1 at 2019-03-26 10:58:06 -0300
+Started GET "/assets/bootstrap/dropdown.self-561cca1cbaf67474e01e9536f106bad541594860a6df997004591c1c1957a147.js?body=1" for ::1 at 2019-03-26 10:58:06 -0300
+Started GET "/assets/slimscroll/jquery.slimscroll.min.self-a2008e2992d055fbe5108d326a54c3083f843da1a30240d2b2e1f706716fa03e.js?body=1" for ::1 at 2019-03-26 10:58:06 -0300
+Started GET "/assets/bootstrap/affix.self-6d6f1a7fc5c8aabf3547fa1b794fab6268f54bc55ad815e55873c71f52513517.js?body=1" for ::1 at 2019-03-26 10:58:06 -0300
+Started GET "/assets/bootstrap/scrollspy.self-969f3c5f48cdf1e439c7fa1154c13b948715f5c689f87837c0b64521d3b46ef6.js?body=1" for ::1 at 2019-03-26 10:58:06 -0300
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for ::1 at 2019-03-26 10:58:06 -0300
+Started GET "/assets/inspinia.self-0105b2740ac6f751553fae37cd22fd48eee7a5092c5c29e32b685e736a59e704.js?body=1" for ::1 at 2019-03-26 10:58:06 -0300
+Started GET "/assets/bootstrap/tab.self-5bf7078b682f8b131332eefa46b45fa5eff2eca745fc0d03e2991450888f7c28.js?body=1" for ::1 at 2019-03-26 10:58:06 -0300
+Started GET "/assets/pace/pace.min.self-9bf6d667514a59744d5db2c9392aaf5595dec9c131a425ababa1cb8cddb814f2.js?body=1" for ::1 at 2019-03-26 10:58:06 -0300
+Started GET "/assets/notifyjs.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" for ::1 at 2019-03-26 10:58:06 -0300
+Started GET "/assets/bootstrap/bootstrap.min.self-d6ce39ce73037670cfc183b1d73195f2b6f23565856af537a53efafedfe45a21.js?body=1" for ::1 at 2019-03-26 10:58:06 -0300
+Started GET "/assets/notifyjs/notify.self-580979233c906abe103d95ccdbfe97994e5a03d69946ab5b2f74dc3a667fde52.js?body=1" for ::1 at 2019-03-26 10:58:06 -0300
+Started GET "/assets/main.self-e163c51f810df56a70efa8622c26e00d2479bf6661cfd67bcf488d9722ef6e37.js?body=1" for ::1 at 2019-03-26 10:58:06 -0300
+Started GET "/assets/bootstrap/popper.min.self-f3a69a9249ed65c72f242a892d0c8223c6161d0c96e0ac9ae3e4356f832c6f5d.js?body=1" for ::1 at 2019-03-26 10:58:06 -0300
+Started GET "/assets/tilt/tilt.jquery.min.self-8c343b24bfa1ada9122d5f5b38bfaa6fbcbf8f075dd751ff9d72c98278b46d9e.js?body=1" for ::1 at 2019-03-26 10:58:06 -0300
+Started GET "/assets/metisMenu/jquery.metisMenu.self-587029531d977fc7fa10623dd670189a298bd606124c23fc2edd051da5b0c914.js?body=1" for ::1 at 2019-03-26 10:58:06 -0300
+Started GET "/assets/bootstrap/transition.self-6ad2488465135ab731a045a8ebbe3ea2fc501aed286042496eda1664fdd07ba9.js?body=1" for ::1 at 2019-03-26 10:58:06 -0300
+Started GET "/assets/bootstrap/popover.self-ca78ba0a35d9471f5df51b8fafb26912ce912d4c04351c6efbad984c32c3e3cb.js?body=1" for ::1 at 2019-03-26 10:58:07 -0300
+Started GET "/assets/bootstrap/tooltip.self-05afb177e08f98997ccfc84fa08a215e4b27d48d5fe4d049080675e9dffd8199.js?body=1" for ::1 at 2019-03-26 10:58:07 -0300
+Started GET "/assets/select2/select2.min.self-29080377793c2a531be0bad7d46aa3fcf1ede0008ebf68b1e4f97927f368ac38.js?body=1" for ::1 at 2019-03-26 10:58:07 -0300
+Started GET "/instrument_registrations" for ::1 at 2019-03-26 10:58:11 -0300
+  
+ActionController::RoutingError (uninitialized constant InstrumentRegistrationsController):
+  
+activesupport (5.2.1) lib/active_support/inflector/methods.rb:283:in `const_get'
+activesupport (5.2.1) lib/active_support/inflector/methods.rb:283:in `block in constantize'
+activesupport (5.2.1) lib/active_support/inflector/methods.rb:281:in `each'
+activesupport (5.2.1) lib/active_support/inflector/methods.rb:281:in `inject'
+activesupport (5.2.1) lib/active_support/inflector/methods.rb:281:in `constantize'
+actionpack (5.2.1) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (5.2.1) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (5.2.1) lib/action_dispatch/routing/route_set.rb:46:in `controller'
+actionpack (5.2.1) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.2.1) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.1) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.1) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.1) lib/action_dispatch/routing/route_set.rb:840:in `call'
+warden (1.2.7) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.7) lib/warden/manager.rb:35:in `catch'
+warden (1.2.7) lib/warden/manager.rb:35:in `call'
+rack (2.0.5) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.5) lib/rack/etag.rb:25:in `call'
+rack (2.0.5) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.5) lib/rack/head.rb:12:in `call'
+actionpack (5.2.1) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.5) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.5) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.1) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.1) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.1) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.5) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Started GET "/" for 127.0.0.1 at 2019-05-14 00:22:42 -0300
+  [1m[35m (3.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
+):
+  
+activerecord (5.2.2.1) lib/active_record/migration.rb:579:in `check_pending!'
+activerecord (5.2.2.1) lib/active_record/migration.rb:556:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.2.1) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+  [1m[35m (614.4ms)[0m  [1m[35mCREATE DATABASE "patrimonio_development" ENCODING = 'utf8'[0m
+Started GET "/" for 127.0.0.1 at 2019-05-14 00:25:14 -0300
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        bin/rails db:migrate RAILS_ENV=development
+
+):
+  
+activerecord (5.2.2.1) lib/active_record/migration.rb:579:in `check_pending!'
+activerecord (5.2.2.1) lib/active_record/migration.rb:556:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.2.1) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+  [1m[35m (8.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (9.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6422231674990211115)[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20180903114430)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (24.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20180903114430"]]
+  [1m[35m (19.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-05-14 03:25:32.430592"], ["updated_at", "2019-05-14 03:25:32.430592"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(6422231674990211115)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (1.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "900828@tjce.br"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Rômulo"], ["email", "900828@tjce.br"], ["encrypted_password", "$2a$11$VbusUR9p5NxqESEDENbMO.kU9GkVJ03GISWGnBjfvoFqYVsFvidLS"], ["created_at", "2019-05-14 03:25:43.974541"], ["updated_at", "2019-05-14 03:25:43.974541"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for 127.0.0.1 at 2019-05-14 00:26:11 -0300
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+Completed 401 Unauthorized in 23ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-14 00:26:11 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/login
+  Rendered devise/shared/_links.html.erb (3.8ms)
+  Rendered devise/sessions/new.html.erb within layouts/login (40.8ms)
+Completed 200 OK in 16989ms (Views: 16947.8ms | ActiveRecord: 14.2ms)
+
+
+Started GET "/assets/font-awesome.self-2a86d2017f4b74f22943750b3b50b9cb753581bab96cbdaaf2df53f4c04c995b.css?body=1" for 127.0.0.1 at 2019-05-14 00:26:28 -0300
+Started GET "/assets/animate/animate.self-570992b3ad6a262de1924aa4ecc17a6f9cf45cb8fd0daaf3cfe5a9f2f3e08e2e.css?body=1" for 127.0.0.1 at 2019-05-14 00:26:28 -0300
+Started GET "/assets/dataTables/datatables.min.self-ca2a4585c54aaf152e8523922a960b5f956f8c3f1dbc68b780b0f59419efeb37.css?body=1" for 127.0.0.1 at 2019-05-14 00:26:28 -0300
+Started GET "/assets/application.self-57a5f2f33d24688136dc6332b520d3b3a2ccbecbbf5034f5c20480f3e4d12d6b.css?body=1" for 127.0.0.1 at 2019-05-14 00:26:28 -0300
+Started GET "/assets/main.self-f5a7cdf8f68947ff64d294eef540edb6f44c48df63b521148fb3e1872911d484.css?body=1" for 127.0.0.1 at 2019-05-14 00:26:28 -0300
+Started GET "/assets/css-hamburgers/hamburgers.min.self-b3bfa2977fd7b52c934dad97e466658223fa6c4283413a19b70d5be4cd910b09.css?body=1" for 127.0.0.1 at 2019-05-14 00:26:28 -0300
+Started GET "/assets/util.self-058acc63df74deca8f02557040aefca291a8a2a414f06aec1db224827c3a50c8.css?body=1" for 127.0.0.1 at 2019-05-14 00:26:28 -0300
+Started GET "/assets/jquery/jquery-3.1.1.min.self-9347a28e490a684188bc8e7748f6f086a53a87088854ac4de47095f42a085b5b.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:28 -0300
+Started GET "/assets/bootstrap/alert.self-7c7aa23778284da0e4aa395a0a6d858c7efd891c9312fe71908b28292654ac0c.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:28 -0300
+Started GET "/assets/bootstrap/affix.self-b2bd74404ab3c627c5129dcdd3bdc2fc0a9d4bff4e1b6f1bae96412f9a1e9723.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:28 -0300
+Started GET "/assets/bootstrap/button.self-b7a8ce9f47662b97ab74ef3dd416e93d3a4f644b252307a28231976a0149feef.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/style.self-9a95a2451ea076fa14fedd523275f3ddfce18c4ab9db5ed215631390a23c67fd.css?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/bootstrap/carousel.self-c2c0ad2347d3fdd8447abd9d5792efed40ad5afadc5e0de3001e34904a6f68ce.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/bootstrap/collapse.self-4db094cc14a1aafa93e51e6f298115323037bb9e24c060dd0de52f27446f6227.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/bootstrap/dropdown.self-7efa4aa654357ae664a98ec52151c25cd4927eacd1fabe038d068d9344b62cbd.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/bootstrap/modal.self-4ca048907279f4bb9187ba2541ae5d03296917d5c42e8fef0b58ec31c8902f0f.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/bootstrap/scrollspy.self-e62629e47ba5fe8b7faaa745f2fef2ccdb1bfd56ffb4f95615684ef40c74bcc4.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/bootstrap/tab.self-7fbfa844201ceeb4b896e4d185a33df19a284fe461281b7c0f78dbea2ef6da5a.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/bootstrap/transition.self-3c74f1999fcbf39cfb240b67c9a9e900863859f82f53fb27e5a388fe5e1a1c5c.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/bootstrap/tooltip.self-82858d5843f55bfed321ea59fc5b180f3d2a8afc498ebc4d665561110b807875.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/bootstrap/popover.self-ca78ba0a35d9471f5df51b8fafb26912ce912d4c04351c6efbad984c32c3e3cb.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/bootstrap-sprockets.self-fbfa5ad7d9aa0afe439ec4ff3883acc4cb92b62cb67c40d674320c9aa1d4642d.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/metisMenu/jquery.metisMenu.self-587029531d977fc7fa10623dd670189a298bd606124c23fc2edd051da5b0c914.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/slimscroll/jquery.slimscroll.min.self-a2008e2992d055fbe5108d326a54c3083f843da1a30240d2b2e1f706716fa03e.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/pdfjs/pdf.self-79a115ff57ba10432a6f6a4af5b90a22e141c87ac27ca6e61d6a3773e2afe765.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/pace/pace.min.self-9bf6d667514a59744d5db2c9392aaf5595dec9c131a425ababa1cb8cddb814f2.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/notifyjs/notify.self-580979233c906abe103d95ccdbfe97994e5a03d69946ab5b2f74dc3a667fde52.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/dataTables/datatables.min.self-b780cdd949f17bced4cdd9bc615568c5ee0eff74e024c214b12a216ef5064d3c.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/pdfjs/pdf.worker.self-5bcdea6c00092279a2a50a8922c4f2850303e41ece02d48deb9b3d87271ec479.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/notifyjs.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/bootstrap/bootstrap.min.self-d6ce39ce73037670cfc183b1d73195f2b6f23565856af537a53efafedfe45a21.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/bootstrap/popper.min.self-f3a69a9249ed65c72f242a892d0c8223c6161d0c96e0ac9ae3e4356f832c6f5d.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/select2/select2.min.self-29080377793c2a531be0bad7d46aa3fcf1ede0008ebf68b1e4f97927f368ac38.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/inspinia.self-0105b2740ac6f751553fae37cd22fd48eee7a5092c5c29e32b685e736a59e704.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/tilt/tilt.jquery.min.self-8c343b24bfa1ada9122d5f5b38bfaa6fbcbf8f075dd751ff9d72c98278b46d9e.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/system.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:29 -0300
+Started GET "/assets/application.self-068cf07d6ceeea13126d4d8fc4d77355cb04b58c2b8b9851b4afc703a2b65d2d.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:30 -0300
+Started GET "/assets/main.self-e163c51f810df56a70efa8622c26e00d2479bf6661cfd67bcf488d9722ef6e37.js?body=1" for 127.0.0.1 at 2019-05-14 00:26:30 -0300
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for 127.0.0.1 at 2019-05-14 00:26:30 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-14 00:30:11 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/login
+  Rendered devise/shared/_links.html.erb (2.1ms)
+  Rendered devise/sessions/new.html.erb within layouts/login (19.1ms)
+Completed 200 OK in 3025ms (Views: 3020.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for 127.0.0.1 at 2019-05-14 00:30:14 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Started GET "/assets/logo-tj-627db004f2ee4a2b7657bd9a0a42a5b1cfe39a0409ffa49f14bb0cd21c81a373.png" for 127.0.0.1 at 2019-05-14 00:30:14 -0300
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-14 00:30:33 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/login
+  Rendered devise/shared/_links.html.erb (9.9ms)
+  Rendered devise/sessions/new.html.erb within layouts/login (16.9ms)
+Completed 200 OK in 163ms (Views: 161.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for 127.0.0.1 at 2019-05-14 00:30:33 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-14 00:30:45 -0300
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for 127.0.0.1 at 2019-05-14 00:30:46 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/login
+  Rendered devise/shared/_links.html.erb (2.8ms)
+  Rendered devise/sessions/new.html.erb within layouts/login (10.5ms)
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Completed 200 OK in 334ms (Views: 332.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for 127.0.0.1 at 2019-05-14 00:30:46 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for 127.0.0.1 at 2019-05-14 00:31:03 -0300
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-14 00:31:03 -0300
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::SessionsController#new as HTML
+  [1m[35m (3.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+  Rendering devise/sessions/new.html.erb within layouts/login
+  Rendered devise/shared/_links.html.erb (39.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/login (219.3ms)
+Completed 200 OK in 1293ms (Views: 1227.6ms | ActiveRecord: 22.5ms)
+
+
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for 127.0.0.1 at 2019-05-14 00:31:04 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-14 00:31:36 -0300
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for 127.0.0.1 at 2019-05-14 00:31:36 -0300
+Processing by Devise::SessionsController#new as HTML
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+  Rendering devise/sessions/new.html.erb within layouts/login
+  Rendered devise/shared/_links.html.erb (5.2ms)
+  Rendered devise/sessions/new.html.erb within layouts/login (32.2ms)
+Completed 200 OK in 353ms (Views: 351.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/logo-tj-627db004f2ee4a2b7657bd9a0a42a5b1cfe39a0409ffa49f14bb0cd21c81a373.png" for 127.0.0.1 at 2019-05-14 00:31:37 -0300
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for 127.0.0.1 at 2019-05-14 00:31:37 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-14 00:32:23 -0300
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for 127.0.0.1 at 2019-05-14 00:32:23 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/login
+  Rendered devise/shared/_links.html.erb (1.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/login (9.5ms)
+Completed 200 OK in 365ms (Views: 363.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for 127.0.0.1 at 2019-05-14 00:32:23 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-14 00:32:52 -0300
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for 127.0.0.1 at 2019-05-14 00:32:52 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/login
+  Rendered devise/shared/_links.html.erb (1.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/login (6.6ms)
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Completed 200 OK in 533ms (Views: 531.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for 127.0.0.1 at 2019-05-14 00:32:53 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-05-14 00:33:11 -0300
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for 127.0.0.1 at 2019-05-14 00:33:11 -0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering devise/sessions/new.html.erb within layouts/login
+  Rendered devise/shared/_links.html.erb (1.4ms)
+  Rendered devise/sessions/new.html.erb within layouts/login (9.5ms)
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Completed 200 OK in 430ms (Views: 426.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for 127.0.0.1 at 2019-05-14 00:33:12 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-05-14 00:33:28 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FjYD3KGwu4z/eLWEWdpTlmvY0lU2354KaxGII4YvdlRUQZOZLtT6B/81bTA9grzZyM05adrqQCf5utaGJHANvA==", "user"=>{"email"=>"900828@tjce.jus.br", "password"=>"[FILTERED]"}, "commit"=>"Entrar"}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "900828@tjce.jus.br"], ["LIMIT", 1]]
+Completed 401 Unauthorized in 19ms (ActiveRecord: 1.9ms)
+
+
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FjYD3KGwu4z/eLWEWdpTlmvY0lU2354KaxGII4YvdlRUQZOZLtT6B/81bTA9grzZyM05adrqQCf5utaGJHANvA==", "user"=>{"email"=>"900828@tjce.jus.br", "password"=>"[FILTERED]"}, "commit"=>"Entrar"}
+  Rendering devise/sessions/new.html.erb within layouts/login
+  Rendered devise/shared/_links.html.erb (1.5ms)
+  Rendered devise/sessions/new.html.erb within layouts/login (5.9ms)
+Completed 200 OK in 416ms (Views: 175.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/vendor/tilt/tilt.jquery.min.js" for 127.0.0.1 at 2019-05-14 00:33:29 -0300
+  
+ActionController::RoutingError (No route matches [GET] "/users/vendor/tilt/tilt.jquery.min.js"):
+  
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-05-14 00:33:46 -0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"s+3bz8LqTuTQhdo1z0oo3w9mbfvOSTzF87psSCyTxwzxmkuKTY4Pb9DIAoGrEseQrHOGxyJ84uhhETLtjsy85A==", "user"=>{"email"=>"900828@tjce.br", "password"=>"[FILTERED]"}, "commit"=>"Entrar"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["email", "900828@tjce.br"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 212ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-14 00:33:46 -0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navigation.html.erb (2.5ms)
+  Rendered layouts/_topnavbar.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.6ms)
+Completed 200 OK in 168ms (Views: 163.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/document_registers" for 127.0.0.1 at 2019-05-14 00:34:48 -0300
+  
+ActionController::RoutingError (uninitialized constant DocumentRegistersController):
+  
+activesupport (5.2.2.1) lib/active_support/inflector/methods.rb:283:in `const_get'
+activesupport (5.2.2.1) lib/active_support/inflector/methods.rb:283:in `block in constantize'
+activesupport (5.2.2.1) lib/active_support/inflector/methods.rb:281:in `each'
+activesupport (5.2.2.1) lib/active_support/inflector/methods.rb:281:in `inject'
+activesupport (5.2.2.1) lib/active_support/inflector/methods.rb:281:in `constantize'
+actionpack (5.2.2.1) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (5.2.2.1) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (5.2.2.1) lib/action_dispatch/routing/route_set.rb:46:in `controller'
+actionpack (5.2.2.1) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.2.2.1) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.2.1) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.2.1) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.2.1) lib/action_dispatch/routing/route_set.rb:840:in `call'
+warden (1.2.8) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.8) lib/warden/manager.rb:34:in `catch'
+warden (1.2.8) lib/warden/manager.rb:34:in `call'
+rack (2.0.6) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.6) lib/rack/etag.rb:25:in `call'
+rack (2.0.6) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.6) lib/rack/head.rb:12:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.6) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.6) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.2.1) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.2.1) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Started GET "/" for 127.0.0.1 at 2019-05-14 00:35:40 -0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (2.7ms)
+  Rendered layouts/_navigation.html.erb (1.9ms)
+  Rendered layouts/_topnavbar.html.erb (1.5ms)
+  Rendered layouts/_footer.html.erb (0.6ms)
+Completed 200 OK in 277ms (Views: 273.1ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/instrument_registrations" for 127.0.0.1 at 2019-05-14 00:35:43 -0300
+  
+ActionController::RoutingError (uninitialized constant InstrumentRegistrationsController):
+  
+activesupport (5.2.2.1) lib/active_support/inflector/methods.rb:283:in `const_get'
+activesupport (5.2.2.1) lib/active_support/inflector/methods.rb:283:in `block in constantize'
+activesupport (5.2.2.1) lib/active_support/inflector/methods.rb:281:in `each'
+activesupport (5.2.2.1) lib/active_support/inflector/methods.rb:281:in `inject'
+activesupport (5.2.2.1) lib/active_support/inflector/methods.rb:281:in `constantize'
+actionpack (5.2.2.1) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (5.2.2.1) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (5.2.2.1) lib/action_dispatch/routing/route_set.rb:46:in `controller'
+actionpack (5.2.2.1) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.2.2.1) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.2.1) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.2.1) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.2.1) lib/action_dispatch/routing/route_set.rb:840:in `call'
+warden (1.2.8) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.8) lib/warden/manager.rb:34:in `catch'
+warden (1.2.8) lib/warden/manager.rb:34:in `call'
+rack (2.0.6) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.6) lib/rack/etag.rb:25:in `call'
+rack (2.0.6) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.6) lib/rack/head.rb:12:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.6) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.6) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.2.1) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.2.1) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2.1) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2.1) lib/rails/engine.rb:524:in `call'
+rack (2.0.6) lib/rack/handler/webrick.rb:86:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:140:in `service'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/httpserver.rb:96:in `run'
+/Users/hubtec/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0/webrick/server.rb:307:in `block in start_thread'
+Started GET "/" for 127.0.0.1 at 2019-05-14 00:36:15 -0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.6ms)
+  Rendered layouts/_navigation.html.erb (1.7ms)
+  Rendered layouts/_topnavbar.html.erb (2.0ms)
+  Rendered layouts/_footer.html.erb (0.6ms)
+Completed 200 OK in 441ms (Views: 436.4ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-14 00:36:53 -0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (1.5ms)
+  Rendered layouts/_navigation.html.erb (3.2ms)
+  Rendered layouts/_topnavbar.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.6ms)
+Completed 200 OK in 323ms (Views: 283.7ms | ActiveRecord: 8.6ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-05-14 00:37:18 -0300
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (0.7ms)
+  Rendered layouts/_navigation.html.erb (2.0ms)
+  Rendered layouts/_topnavbar.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 218ms (Views: 213.5ms | ActiveRecord: 0.7ms)
+
+
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6422231674990211115)[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateOrders (20190514035822)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (10.8ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "status" character varying, "number" character varying, "os_date" date, "hour" timestamp, "medium" character varying, "called" character varying, "operator" integer, "sector" character varying, "responsible" character varying, "contact" character varying, "unity" character varying, "scope" character varying, "address" character varying, "route" boolean, "vehicle" character varying, "ranking" character varying, "modality" character varying, "cause" character varying, "description" character varying, "authorization" character varying, "priority" character varying, "link" character varying, "operational" character varying, "measure" boolean, "request_date" date, "insertion_routing" character varying, "reporting_routing" character varying, "deliberation" character varying, "temporal_lapse" character varying, "order_record" character varying, "feedback" character varying, "execution_availability" character varying, "devolution" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190514035822"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(6422231674990211115)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2019-05-14 00:58:50 -0300
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by HomeController#index as HTML
+  [1m[36mUser Load (1.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (3.4ms)
+Started GET "/orders" for 127.0.0.1 at 2019-05-14 00:58:51 -0300
+  Rendered layouts/_navigation.html.erb (2.6ms)
+  Rendered layouts/_topnavbar.html.erb (7.1ms)
+  Rendered layouts/_footer.html.erb (0.7ms)
+Completed 200 OK in 3680ms (Views: 3629.0ms | ActiveRecord: 9.1ms)
+
+
+Processing by OrdersController#index as HTML
+  [1m[36mUser Load (2.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering orders/index.html.erb within layouts/application
+  Rendered orders/_header.html.erb (2.3ms)
+  [1m[36mOrder Load (1.8ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  Rendered orders/index.html.erb within layouts/application (17.3ms)
+  Rendered layouts/_navigation.html.erb (3.3ms)
+  Rendered layouts/_topnavbar.html.erb (1.5ms)
+  Rendered layouts/_footer.html.erb (1.0ms)
+Completed 200 OK in 289ms (Views: 267.6ms | ActiveRecord: 14.7ms)
+
+
+Started GET "/assets/orders.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2019-05-14 00:58:54 -0300
+Started GET "/orders" for 127.0.0.1 at 2019-05-14 00:59:19 -0300
+Processing by OrdersController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering orders/index.html.erb within layouts/application
+  Rendered orders/_header.html.erb (0.7ms)
+  [1m[36mOrder Load (8.6ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  Rendered orders/index.html.erb within layouts/application (18.4ms)
+  Rendered layouts/_navigation.html.erb (1.8ms)
+  Rendered layouts/_topnavbar.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 453ms (Views: 423.5ms | ActiveRecord: 9.2ms)
+
+
+Started GET "/orders" for 127.0.0.1 at 2019-05-14 00:59:23 -0300
+Processing by OrdersController#index as HTML
+  [1m[36mUser Load (5.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering orders/index.html.erb within layouts/application
+  Rendered orders/_header.html.erb (23.8ms)
+  [1m[36mOrder Load (0.6ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  Rendered orders/index.html.erb within layouts/application (31.0ms)
+  Rendered layouts/_navigation.html.erb (2.0ms)
+  Rendered layouts/_topnavbar.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.7ms)
+Completed 200 OK in 193ms (Views: 183.6ms | ActiveRecord: 6.0ms)
+
+
+Started GET "/orders/new" for 127.0.0.1 at 2019-05-14 00:59:25 -0300
+Processing by OrdersController#new as HTML
+  [1m[36mUser Load (37.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering orders/new.html.erb within layouts/application
+  Rendered orders/_header.html.erb (1.6ms)
+  Rendered orders/_form.html.erb (96.4ms)
+  Rendered orders/new.html.erb within layouts/application (103.8ms)
+  Rendered layouts/_navigation.html.erb (7.1ms)
+  Rendered layouts/_topnavbar.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 486ms (Views: 337.2ms | ActiveRecord: 60.0ms)
+
+
+Started GET "/orders/new" for 127.0.0.1 at 2019-05-14 01:01:16 -0300
+Processing by OrdersController#new as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering orders/new.html.erb within layouts/application
+  Rendered orders/_header.html.erb (0.8ms)
+  Rendered orders/_form.html.erb (68.2ms)
+  Rendered orders/new.html.erb within layouts/application (78.5ms)
+  Rendered layouts/_navigation.html.erb (1.9ms)
+  Rendered layouts/_topnavbar.html.erb (0.9ms)
+  Rendered layouts/_footer.html.erb (6.1ms)
+Completed 200 OK in 392ms (Views: 386.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/orders/new" for 127.0.0.1 at 2019-05-14 01:01:43 -0300
+Processing by OrdersController#new as HTML
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering orders/new.html.erb within layouts/application
+  Rendered orders/_header.html.erb (37.6ms)
+  Rendered orders/_form.html.erb (58.2ms)
+  Rendered orders/new.html.erb within layouts/application (99.8ms)
+  Rendered layouts/_navigation.html.erb (1.9ms)
+  Rendered layouts/_topnavbar.html.erb (13.8ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 297ms (Views: 281.7ms | ActiveRecord: 1.6ms)
+
+
+Started POST "/orders" for 127.0.0.1 at 2019-05-14 01:04:38 -0300
+Processing by OrdersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"bO5d7DW6O3jHAQyNQPhbOPbOPmSLeqaoEeEhPLI4YhTGXB/yoJp+NaBU7IxI0PRLrZCf9b216+uc7ijkW9AbDw==", "order"=>{"status"=>"xiqxiu", "number"=>"dowconwco", "os_date(3i)"=>"14", "os_date(2i)"=>"5", "os_date(1i)"=>"2019", "hour(3i)"=>"14", "hour(2i)"=>"5", "hour(1i)"=>"2019", "hour(4i)"=>"04", "hour(5i)"=>"01", "medium"=>"cnwdocinwocin", "called"=>"ocinwocwocin", "operator"=>"1", "sector"=>"cowncoiwnco", "responsible"=>"oicwonwc", "contact"=>"cwowcow", "unity"=>"cowincowicow", "scope"=>"ociwnociwnocw", "address"=>"cowocnwoncwo", "route"=>"0", "vehicle"=>"cowocnwocnwo", "ranking"=>"ocnwocnwocnwoc", "modality"=>"jpwdcjwdpoj", "cause"=>"ocwpwjcpwjcp", "description"=>"pcjwpcjwpjcwpj", "authorization"=>"pcjwpcjwpcj", "priority"=>"pjcwpjcpwjpcwjpo", "link"=>"ownwicjwoi", "operational"=>"cowicowcoiwjoicw", "measure"=>"1", "request_date(3i)"=>"14", "request_date(2i)"=>"5", "request_date(1i)"=>"2019", "insertion_routing"=>"cojwocjow", "reporting_routing"=>"cojwocwjcoi", "deliberation"=>"coiwjcoiwjco", "temporal_lapse"=>"jcowijcwoij", "order_record"=>"ocijwocjwoi", "feedback"=>"ojowjcowj", "execution_availability"=>"ojoqjcoi", "devolution"=>"owcoiwjcowiow"}, "commit"=>"Salvar"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Create (1.9ms)[0m  [1m[32mINSERT INTO "orders" ("status", "number", "os_date", "hour", "medium", "called", "operator", "sector", "responsible", "contact", "unity", "scope", "address", "route", "vehicle", "ranking", "modality", "cause", "description", "authorization", "priority", "link", "operational", "measure", "request_date", "insertion_routing", "reporting_routing", "deliberation", "temporal_lapse", "order_record", "feedback", "execution_availability", "devolution", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35) RETURNING "id"[0m  [["status", "xiqxiu"], ["number", "dowconwco"], ["os_date", "2019-05-14"], ["hour", "2019-05-14 04:01:00"], ["medium", "cnwdocinwocin"], ["called", "ocinwocwocin"], ["operator", 1], ["sector", "cowncoiwnco"], ["responsible", "oicwonwc"], ["contact", "cwowcow"], ["unity", "cowincowicow"], ["scope", "ociwnociwnocw"], ["address", "cowocnwoncwo"], ["route", false], ["vehicle", "cowocnwocnwo"], ["ranking", "ocnwocnwocnwoc"], ["modality", "jpwdcjwdpoj"], ["cause", "ocwpwjcpwjcp"], ["description", "pcjwpcjwpjcwpj"], ["authorization", "pcjwpcjwpcj"], ["priority", "pjcwpjcpwjpcwjpo"], ["link", "ownwicjwoi"], ["operational", "cowicowcoiwjoicw"], ["measure", true], ["request_date", "2019-05-14"], ["insertion_routing", "cojwocjow"], ["reporting_routing", "cojwocwjcoi"], ["deliberation", "coiwjcoiwjco"], ["temporal_lapse", "jcowijcwoij"], ["order_record", "ocijwocjwoi"], ["feedback", "ojowjcowj"], ["execution_availability", "ojoqjcoi"], ["devolution", "owcoiwjcowiow"], ["created_at", "2019-05-14 04:04:38.180862"], ["updated_at", "2019-05-14 04:04:38.180862"]]
+  [1m[35m (3.7ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/orders/1
+Completed 302 Found in 24ms (ActiveRecord: 6.6ms)
+
+
+Started GET "/orders/1" for 127.0.0.1 at 2019-05-14 01:04:38 -0300
+Processing by OrdersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mOrder Load (0.7ms)[0m  [1m[34mSELECT  "orders".* FROM "orders" WHERE "orders"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering orders/show.html.erb within layouts/application
+  Rendered orders/_header.html.erb (1.0ms)
+  Rendered orders/show.html.erb within layouts/application (62.5ms)
+  Rendered layouts/_navigation.html.erb (1.9ms)
+  Rendered layouts/_topnavbar.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.7ms)
+Completed 200 OK in 262ms (Views: 250.2ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/orders" for 127.0.0.1 at 2019-05-14 01:04:48 -0300
+Processing by OrdersController#index as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering orders/index.html.erb within layouts/application
+  Rendered orders/_header.html.erb (1.0ms)
+  [1m[36mOrder Load (0.9ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  Rendered orders/index.html.erb within layouts/application (12.1ms)
+  Rendered layouts/_navigation.html.erb (3.9ms)
+  Rendered layouts/_topnavbar.html.erb (1.9ms)
+  Rendered layouts/_footer.html.erb (0.6ms)
+Completed 200 OK in 280ms (Views: 274.6ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/orders" for 127.0.0.1 at 2019-05-14 01:06:42 -0300
+Processing by OrdersController#index as HTML
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering orders/index.html.erb within layouts/application
+  Rendered orders/_header.html.erb (0.8ms)
+  [1m[36mOrder Load (0.7ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  Rendered orders/index.html.erb within layouts/application (8.8ms)
+  Rendered layouts/_navigation.html.erb (2.5ms)
+  Rendered layouts/_topnavbar.html.erb (1.0ms)
+  Rendered layouts/_footer.html.erb (0.5ms)
+Completed 200 OK in 224ms (Views: 215.7ms | ActiveRecord: 2.4ms)
+
+
+Started GET "/orders" for 127.0.0.1 at 2019-05-14 01:09:06 -0300
+Processing by OrdersController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering orders/index.html.erb within layouts/application
+  Rendered orders/_header.html.erb (0.8ms)
+  [1m[36mOrder Load (1.0ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  Rendered orders/index.html.erb within layouts/application (8.1ms)
+  Rendered layouts/_navigation.html.erb (2.5ms)
+  Rendered layouts/_topnavbar.html.erb (1.1ms)
+  Rendered layouts/_footer.html.erb (0.6ms)
+Completed 200 OK in 181ms (Views: 176.5ms | ActiveRecord: 1.6ms)
+
+
